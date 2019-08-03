@@ -5,6 +5,7 @@ import com.amazonaws.ClientConfiguration;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.SignerFactory;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Request;
@@ -15,7 +16,10 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        String bucketName = "zalando-datalake-binary";
+        // String bucketName = "zalando-datalake-binary";
+        // String region = "eu-central-1";
+        String bucketName = "zalando-saiki-datalake-eu-west-1";
+        String region = "eu-west-1";
         // SignerFactory.registerSigner("LakefsSignerType", NoOpSigner.class);
         // SignerFactory.registerSigner("LakefsSignerType", (Class<? extends Signer>) Class.forName("com.amazonaws.services.s3.internal.AWSS3V4Signer"));
         // SignerFactory.registerSigner("LakefsSignerType", AWSS3V4Signer.class);
@@ -27,6 +31,7 @@ public class App {
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                     .withCredentials(new ProfileCredentialsProvider("saiki"))
                     .withClientConfiguration(config)
+                    .withRegion("eu-west-1")
                     .build();
 
             System.out.println("Listing objects");
